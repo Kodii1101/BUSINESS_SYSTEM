@@ -6,18 +6,30 @@ package main.systemApp;
 //package external
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-public class Main {
+public class Main extends Application {
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        // Load the FXML file
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
+        AnchorPane root = loader.load();
+
+        // Set the scene
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+
+        // Show the stage
+        primaryStage.setTitle("Login Example");
+        primaryStage.show();
+    }
+
     public static void main(String[] args) {
-        System.out.println("Transitioned to JavaFX!");
-        char[] password = "mySecurePassword".toCharArray();
-        System.out.println("Hello, ARGON2!");
-        Argon2 argon2 = Argon2Factory.create();
-        String hash = argon2.hash(10, 65536, 1, password);
-        System.out.println("Hashed Password: " + hash);
+        launch(args);
     }
 }
